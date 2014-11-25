@@ -79,12 +79,12 @@ namespace SoftwareKobo.CnblogsAPI.Model
             set;
         }
 
-        public async Task<IEnumerable<NewsComment>> CommentsAsync()
+        public async Task<IEnumerable<Comment>> CommentsAsync()
         {
             return await NewsService.CommentsAsync(Id);
         }
 
-        public async Task<IEnumerable<NewsComment>> CommentsAsync(int pageIndex, int pageSize)
+        public async Task<IEnumerable<Comment>> CommentsAsync(int pageIndex, int pageSize)
         {
             return await NewsService.CommentsAsync(Id, pageIndex, pageSize);
         }

@@ -30,7 +30,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async static Task<IEnumerable<NewsComment>> CommentsAsync(int newsId, int pageIndex, int pageSize)
+        public async static Task<IEnumerable<Comment>> CommentsAsync(int newsId, int pageIndex, int pageSize)
         {
             if (newsId < MinNewsId)
             {
@@ -65,7 +65,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
         }
 
-        public async static Task<IEnumerable<NewsComment>> CommentsAsync(int newsId)
+        public async static Task<IEnumerable<Comment>> CommentsAsync(int newsId)
         {
             return await CommentsAsync(newsId, 1, int.MaxValue);
         }
@@ -252,7 +252,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             return news;
         }
 
-        private static NewsComment DeserializeToNewsComment(XElement element)
+        private static Comment DeserializeToNewsComment(XElement element)
         {
             if (element == null)
             {
@@ -277,7 +277,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
                 return null;
             }
 
-            return new NewsComment
+            return new Comment
             {
                 Id = int.Parse(id.Value),
                 Title = title.Value,
@@ -288,7 +288,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             };
         }
 
-        private static IEnumerable<NewsComment> DeserializeToNewsComments(XDocument document)
+        private static IEnumerable<Comment> DeserializeToNewsComments(XDocument document)
         {
             if (document == null)
             {

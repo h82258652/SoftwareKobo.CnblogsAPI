@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace SoftwareKobo.CnblogsAPI.Service
 {
-    internal class AuthorService
+    internal static class AuthorService
     {
         internal static Author DeserializeToAuthor(XElement element)
         {

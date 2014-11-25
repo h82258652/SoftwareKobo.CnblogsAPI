@@ -2,7 +2,7 @@
 
 namespace SoftwareKobo.CnblogsAPI.Model
 {
-    public class NewsComment
+    public class Comment
     {
         public Author Author
         {
