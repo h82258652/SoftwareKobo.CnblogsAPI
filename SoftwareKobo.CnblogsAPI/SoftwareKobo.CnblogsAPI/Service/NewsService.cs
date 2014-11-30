@@ -1,4 +1,5 @@
 ﻿using SoftwareKobo.CnblogsAPI.Model;
+using SoftwareKobo.Net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
