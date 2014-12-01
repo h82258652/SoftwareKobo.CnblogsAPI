@@ -1,4 +1,6 @@
-﻿using SoftwareKobo.CnblogsAPI.Model;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using SoftwareKobo.CnblogsAPI.Model;
 using System;
 using System.Xml.Linq;
 

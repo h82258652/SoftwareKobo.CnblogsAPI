@@ -25,12 +25,25 @@ namespace SoftwareKobo.CnblogsAPI.Service
         private const string RecommendUrlTemplate = "http://wcf.open.cnblogs.com/news/recommend/paged/{0}/{1}";
 
         /// <summary>
-        /// 获取新闻评论
+        /// 获取新闻评论。
         /// </summary>
-        /// <param name="newsId"></param>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
+        /// <param name="newsId">新闻 Id。</param>
+        /// <returns>评论。</returns>
+        public async static Task<IEnumerable<Comment>> CommentsAsync(int newsId)
+        {
+            return await CommentsAsync(newsId, 1, int.MaxValue);
+        }
+
+        /// <summary>
+        /// 获取新闻评论。
+        /// </summary>
+        /// <param name="newsId">新闻 Id。</param>
+        /// <param name="pageIndex">第几页，从 1 开始。</param>
+        /// <param name="pageSize">每页条数。</param>
+        /// <returns>评论。</returns>
+        /// <exception cref="ArgumentOutOfRangeException">新闻 Id 错误。</exception>
+        /// <exception cref="ArgumentOutOfRangeException">评论页数错误。</exception>
+        /// <exception cref="ArgumentOutOfRangeException">评论条数错误。</exception>
         public async static Task<IEnumerable<Comment>> CommentsAsync(int newsId, int pageIndex, int pageSize)
         {
             if (newsId < MinNewsId)
@@ -62,20 +75,15 @@ namespace SoftwareKobo.CnblogsAPI.Service
             using (var response = await request.GetResponseAsync())
             {
                 var document = XDocument.Load(response.GetResponseStream());
-                return DeserializeToNewsComments(document);
+                return CommentService.DeserializeToNewsComments(document);
             }
         }
 
-        public async static Task<IEnumerable<Comment>> CommentsAsync(int newsId)
-        {
-            return await CommentsAsync(newsId, 1, int.MaxValue);
-        }
-
         /// <summary>
-        /// 获取新闻内容
+        /// 获取新闻内容。
         /// </summary>
-        /// <param name="newsId"></param>
-        /// <returns></returns>
+        /// <param name="newsId">新闻 Id。</param>
+        /// <returns>新闻。</returns>
         public async static Task<NewsDetail> DetailAsync(int newsId)
         {
             if (newsId < MinNewsId)
@@ -88,7 +96,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             var request = WebRequest.Create(uri);
             using (var response = (HttpWebResponse)await request.GetResponseAsync())
             {
-                if (response.StatusCode == HttpStatusCode.InternalServerError)
+                if (response.StatusCode.HasFlag(HttpStatusCode.InternalServerError))
                 {
                     throw new ArgumentOutOfRangeException("newsId");
                 }
@@ -100,10 +108,10 @@ namespace SoftwareKobo.CnblogsAPI.Service
         }
 
         /// <summary>
-        /// 获取热门新闻列表
+        /// 获取热门新闻列表。
         /// </summary>
-        /// <param name="itemCount"></param>
-        /// <returns></returns>
+        /// <param name="itemCount">条数。</param>
+        /// <returns>新闻列表。</returns>
         public static async Task<IEnumerable<News>> HotAsync(int itemCount)
         {
             if (itemCount < 1)
@@ -124,9 +132,11 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <summary>
         /// 分页获取最新新闻列表
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
+        /// <param name="pageIndex">第几页，从 1 开始。</param>
+        /// <param name="pageSize">每页条数。</param>
+        /// <returns>新闻。</returns>
+        /// <exception cref="ArgumentOutOfRangeException">新闻页数错误。</exception>
+        /// <exception cref="ArgumentOutOfRangeException">新闻条数错误。</exception>
         public static async Task<IEnumerable<News>> RecentAsync(int pageIndex, int pageSize)
         {
             if (pageIndex < 1)
@@ -149,6 +159,14 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
         }
 
+        /// <summary>
+        /// 分页获取推荐新闻列表。
+        /// </summary>
+        /// <param name="pageIndex">第几页，从 1 开始。</param>
+        /// <param name="pageSize">每页条数。</param>
+        /// <returns>新闻。</returns>
+        /// <exception cref="ArgumentOutOfRangeException">新闻页数错误。</exception>
+        /// <exception cref="ArgumentOutOfRangeException">新闻条数错误。</exception>
         public static async Task<IEnumerable<News>> RecommendAsync(int pageIndex, int pageSize)
         {
             if (pageIndex < 1)
@@ -251,64 +269,6 @@ namespace SoftwareKobo.CnblogsAPI.Service
                        where temp != null
                        select temp;
             return news;
-        }
-
-        private static Comment DeserializeToNewsComment(XElement element)
-        {
-            if (element == null)
-            {
-                return null;
-            }
-
-            var ns = element.GetDefaultNamespace();
-            var id = element.Element(ns + "id");
-            var title = element.Element(ns + "title");
-            var published = element.Element(ns + "published");
-            var updated = element.Element(ns + "updated");
-            var author = element.Element(ns + "author");
-            var content = element.Element(ns + "content");
-
-            if (id == null
-                || title == null
-                || published == null
-                || updated == null
-                || author == null
-                || content == null)
-            {
-                return null;
-            }
-
-            return new Comment
-            {
-                Id = int.Parse(id.Value),
-                Title = title.Value,
-                Published = DateTime.Parse(published.Value),
-                Updated = DateTime.Parse(updated.Value),
-                Author = AuthorService.DeserializeToAuthor(author),
-                Content = content.Value
-            };
-        }
-
-        private static IEnumerable<Comment> DeserializeToNewsComments(XDocument document)
-        {
-            if (document == null)
-            {
-                return null;
-            }
-
-            var root = document.Root;
-            if (root == null)
-            {
-                return null;
-            }
-
-            var ns = root.GetDefaultNamespace();
-            var comments = from entry in root.Elements(ns + "entry")
-                           where entry.HasElements
-                           let temp = DeserializeToNewsComment(entry)
-                           where temp != null
-                           select temp;
-            return comments;
         }
 
         private static NewsDetail DeserializeToNewsDetail(XDocument document)
