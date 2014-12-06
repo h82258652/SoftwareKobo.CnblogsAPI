@@ -1,7 +1,4 @@
-﻿using SoftwareKobo.CnblogsAPI.Service;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace SoftwareKobo.CnblogsAPI.Model
 {
@@ -116,35 +113,6 @@ namespace SoftwareKobo.CnblogsAPI.Model
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// 获取该新闻的评论。
-        /// </summary>
-        /// <returns>评论。</returns>
-        public async Task<IEnumerable<Comment>> CommentsAsync()
-        {
-            return await NewsService.CommentsAsync(Id);
-        }
-
-        /// <summary>
-        /// 获取该新闻的评论。
-        /// </summary>
-        /// <param name="pageIndex">第几页，从 1 开始。</param>
-        /// <param name="pageSize">每页条数。</param>
-        /// <returns>评论。</returns>
-        public async Task<IEnumerable<Comment>> CommentsAsync(int pageIndex, int pageSize)
-        {
-            return await NewsService.CommentsAsync(Id, pageIndex, pageSize);
-        }
-
-        /// <summary>
-        /// 获取该新闻的详细。
-        /// </summary>
-        /// <returns>详细。</returns>
-        public async Task<NewsDetail> DetailAsync()
-        {
-            return await NewsService.DetailAsync(Id);
         }
     }
 }

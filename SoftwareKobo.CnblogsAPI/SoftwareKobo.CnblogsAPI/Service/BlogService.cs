@@ -83,19 +83,19 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
         }
 
-        [Obsolete]
-        public static async Task<IEnumerable<Blogger>> SearchBlogger(string bloggerName)
-        {
-            // TODO
-            if (bloggerName == null)
-            {
-                throw new ArgumentNullException("bloggerName");
-            }
-            if (bloggerName.Length <= 0)
-            {
-                throw new ArgumentException("博主名不能为空", "bloggerName");
-            }
-            throw new NotImplementedException();
-        }
+        //[Obsolete]
+        //public static async Task<IEnumerable<Blogger>> SearchBlogger(string bloggerName)
+        //{
+        //    // TODO
+        //    if (bloggerName == null)
+        //    {
+        //        throw new ArgumentNullException("bloggerName");
+        //    }
+        //    if (bloggerName.Length <= 0)
+        //    {
+        //        throw new ArgumentException("博主名不能为空", "bloggerName");
+        //    }
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -40,6 +40,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extension\NewsDetailExtensions.cs" />
+    <Compile Include="Extension\NewsExtensions.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Blogger.cs" />
     <Compile Include="Model\News.cs" />
