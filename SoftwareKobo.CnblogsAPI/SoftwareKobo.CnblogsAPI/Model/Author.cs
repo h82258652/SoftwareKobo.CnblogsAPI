@@ -10,7 +10,7 @@ namespace SoftwareKobo.CnblogsAPI.Model
         /// <summary>
         /// 名字。
         /// </summary>
-        internal string Name
+        public string Name
         {
             get;
             set;
@@ -19,7 +19,7 @@ namespace SoftwareKobo.CnblogsAPI.Model
         /// <summary>
         /// 个人主页。
         /// </summary>
-        internal Uri Uri
+        public Uri Uri
         {
             get;
             set;
