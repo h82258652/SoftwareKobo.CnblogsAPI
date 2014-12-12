@@ -8,30 +8,21 @@ namespace SoftwareKobo.CnblogsAPI.Model
     public class Comment
     {
         /// <summary>
-        /// 评论者。
-        /// </summary>
-        public Author Author
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 评论内容。
-        /// </summary>
-        public string Content
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 评论 Id。
+        /// Id。
         /// </summary>
         public int Id
         {
             get;
-            set;
+            internal set;
+        }
+
+        /// <summary>
+        /// 标题，通常为空。
+        /// </summary>
+        public string Title
+        {
+            get;
+            internal set;
         }
 
         /// <summary>
@@ -40,16 +31,7 @@ namespace SoftwareKobo.CnblogsAPI.Model
         public DateTime Published
         {
             get;
-            set;
-        }
-
-        /// <summary>
-        /// 评论标题，通常为空。
-        /// </summary>
-        public string Title
-        {
-            get;
-            set;
+            internal set;
         }
 
         /// <summary>
@@ -58,7 +40,25 @@ namespace SoftwareKobo.CnblogsAPI.Model
         public DateTime Updated
         {
             get;
-            set;
+            internal set;
+        }
+
+        /// <summary>
+        /// 作者。
+        /// </summary>
+        public CommentAuthor Author
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 内容。
+        /// </summary>
+        public string Content
+        {
+            get;
+            internal set;
         }
     }
 }

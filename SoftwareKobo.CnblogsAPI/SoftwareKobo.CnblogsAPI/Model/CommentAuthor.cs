@@ -3,35 +3,26 @@
 namespace SoftwareKobo.CnblogsAPI.Model
 {
     /// <summary>
-    /// 评论者。
+    /// 评论作者。
     /// </summary>
-    public class Author
+    public class CommentAuthor
     {
         /// <summary>
-        /// 名字。
+        /// 名称。
         /// </summary>
         public string Name
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 个人主页。
+        /// 主页。
         /// </summary>
         public Uri Uri
         {
             get;
-            set;
-        }
-
-        /// <summary>
-        /// 用户头像。
-        /// </summary>
-        public Uri Avatar
-        {
-            get;
-            set;
+            internal set;
         }
     }
 }

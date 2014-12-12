@@ -6,36 +6,28 @@ using System.Globalization;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace SoftwareKobo.CnblogsAPI.Service
+namespace SoftwareKobo.CnblogsAPI.Helper
 {
-    /// <summary>
-    /// 博客文章服务。
-    /// </summary>
-    public class ArticleService
+    internal static class NewsHelper
     {
-        internal static IEnumerable<Article> DeserializeToaArticles(XDocument document)
+        internal static IEnumerable<News> Deserialize(XDocument document)
         {
-            if (document == null)
-            {
-                return null;
-            }
-
-            var root = document.Root;
+            var root = document?.Root;
             if (root == null)
             {
                 return null;
             }
 
             var ns = root.GetDefaultNamespace();
-            var articles = from entry in root.Elements(ns + "entry")
-                           where entry.HasElements
-                           let temp = DeserializeToaArticle(entry)
-                           where temp != null
-                           select temp;
-            return articles;
+            var news = from entry in root.Elements(ns + "entry")
+                       where entry.HasElements
+                       let temp = Deserialize(entry)
+                       where temp != null
+                       select temp;
+            return news;
         }
 
-        internal static Article DeserializeToaArticle(XElement element)
+        internal static News Deserialize(XElement element)
         {
             if (element == null)
             {
@@ -48,45 +40,44 @@ namespace SoftwareKobo.CnblogsAPI.Service
             var summary = element.Element(ns + "summary");
             var published = element.Element(ns + "published");
             var updated = element.Element(ns + "updated");
-            var author = element.Element(ns + "author");
-            var link = element.Element(ns + "link");
+            var href = element.Element(ns + "link")?.Attribute("href");
             var diggs = element.Element(ns + "diggs");
             var views = element.Element(ns + "views");
             var comments = element.Element(ns + "comments");
+            var topic = element.Element(ns + "topic");
+            var topicIcon = element.Element(ns + "topicIcon");
+            var sourceName = element.Element(ns + "sourceName");
 
             if (id == null
                 || title == null
                 || summary == null
                 || published == null
                 || updated == null
-                || author == null
-                || link == null
+                || href == null
                 || diggs == null
                 || views == null
-                || comments == null)
+                || comments == null
+                || topic == null
+                || topicIcon == null
+                || sourceName == null)
             {
                 return null;
             }
 
-            var href = link.Attribute("href");
-
-            if (href == null)
+            return new News
             {
-                return null;
-            }
-
-            return new Article
-            {
-                Id = int.Parse(id.Value),
+                Id = int.Parse(id.Value, CultureInfo.InvariantCulture),
                 Title = WebUtility.HtmlDecode(title.Value),
                 Summary = WebUtility.HtmlDecode(summary.Value),
                 Published = DateTime.Parse(published.Value, CultureInfo.InvariantCulture),
                 Updated = DateTime.Parse(updated.Value, CultureInfo.InvariantCulture),
-                Author = AuthorService.DeserializeToAuthor(author),
                 Link = new Uri(href.Value, UriKind.Absolute),
-                Diggs = int.Parse(diggs.Value),
-                Views = int.Parse(views.Value),
-                Comments = int.Parse(comments.Value)
+                Diggs = int.Parse(diggs.Value, CultureInfo.InvariantCulture),
+                Views = int.Parse(views.Value, CultureInfo.InvariantCulture),
+                Comments = int.Parse(comments.Value, CultureInfo.InvariantCulture),
+                Topic = topic.Value,
+                TopicIcon = topicIcon.IsEmpty ? null : new Uri(topicIcon.Value, UriKind.Absolute),
+                SourceName = sourceName.Value
             };
         }
     }

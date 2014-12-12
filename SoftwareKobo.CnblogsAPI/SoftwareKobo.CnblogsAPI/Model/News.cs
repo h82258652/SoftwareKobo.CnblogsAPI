@@ -8,66 +8,12 @@ namespace SoftwareKobo.CnblogsAPI.Model
     public class News
     {
         /// <summary>
-        /// 评论数。
-        /// </summary>
-        public int Comments
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 推荐数。
-        /// </summary>
-        public int Diggs
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 新闻 Id。
+        /// Id。
         /// </summary>
         public int Id
         {
             get;
-            set;
-        }
-
-        /// <summary>
-        /// 新闻链接。
-        /// </summary>
-        public Uri Link
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 发布时间。
-        /// </summary>
-        public DateTime Published
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 转载自。
-        /// </summary>
-        public string SourceName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 摘要。
-        /// </summary>
-        public string Summary
-        {
-            get;
-            set;
+            internal set;
         }
 
         /// <summary>
@@ -76,25 +22,25 @@ namespace SoftwareKobo.CnblogsAPI.Model
         public string Title
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 主题。
+        /// 摘要。
         /// </summary>
-        public string Topic
+        public string Summary
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 主题图标。
+        /// 发表时间。
         /// </summary>
-        public Uri TopicIcon
+        public DateTime Published
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
@@ -103,16 +49,70 @@ namespace SoftwareKobo.CnblogsAPI.Model
         public DateTime Updated
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 查看人数。
+        /// 新闻链接。
+        /// </summary>
+        public Uri Link
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 推荐数。
+        /// </summary>
+        public int Diggs
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 查看数。
         /// </summary>
         public int Views
         {
             get;
-            set;
+            internal set;
+        }
+
+        /// <summary>
+        /// 评论数。
+        /// </summary>
+        public int Comments
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 主题。
+        /// </summary>
+        public string Topic
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 主题图标。
+        /// </summary>
+        public Uri TopicIcon
+        {
+            get;
+            internal set;
+        }
+
+        /// <summary>
+        /// 转载自。
+        /// </summary>
+        public string SourceName
+        {
+            get;
+            internal set;
         }
     }
 }

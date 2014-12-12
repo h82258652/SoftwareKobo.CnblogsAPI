@@ -10,10 +10,10 @@ namespace SoftwareKobo.CnblogsAPI.Model
         /// <summary>
         /// 博客主页。
         /// </summary>
-        public string Id
+        public Uri Id
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
@@ -22,52 +22,52 @@ namespace SoftwareKobo.CnblogsAPI.Model
         public string Title
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 最后更新时间。
+        /// 最后更新日期。
         /// </summary>
         public DateTime Updated
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
         /// 博客主页。
         /// </summary>
-        public string Link
+        public Uri Link
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 用户名
+        /// 用户名。
         /// </summary>
-        public string Blogapp
+        public string BlogApp
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
-        /// 用户头像
+        /// 头像，可能为空。
         /// </summary>
         public Uri Avatar
         {
             get;
-            set;
+            internal set;
         }
 
         /// <summary>
         /// 发表文章数。
         /// </summary>
-        public int? PostCount
+        public int PostCount
         {
             get;
-            set;
+            internal set;
         }
     }
 }

@@ -3,41 +3,32 @@
 namespace SoftwareKobo.CnblogsAPI.Model
 {
     /// <summary>
-    /// 评论。
+    /// 文章作者。
     /// </summary>
-    public class Comment
+    public class ArticleAuthor
     {
         /// <summary>
-        /// Id。
+        /// 名字。
         /// </summary>
-        public int Id
+        public string Name
         {
             get;
             internal set;
         }
 
         /// <summary>
-        /// 标题，通常为空。
+        /// 主页。
         /// </summary>
-        public string Title
+        public Uri Uri
         {
             get;
             internal set;
         }
 
         /// <summary>
-        /// 发表时间。
+        /// 头像，可能为空。
         /// </summary>
-        public DateTime Published
-        {
-            get;
-            internal set;
-        }
-
-        /// <summary>
-        /// 更新时间。
-        /// </summary>
-        public DateTime Updated
+        public Uri Avator
         {
             get;
             internal set;

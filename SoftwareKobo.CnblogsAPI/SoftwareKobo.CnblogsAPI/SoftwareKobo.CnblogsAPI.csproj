@@ -42,19 +42,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extension\NewsDetailExtensions.cs" />
-    <Compile Include="Extension\NewsExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Extension\ArticleExtension.cs" />
+    <Compile Include="Extension\BloggerExtension.cs" />
+    <Compile Include="Extension\NewsDetailExtension.cs" />
+    <Compile Include="Extension\NewsExtension.cs" />
+    <Compile Include="Helper\ArticleAuthorHelper.cs" />
+    <Compile Include="Helper\ArticleHelper.cs" />
+    <Compile Include="Helper\BloggerHelper.cs" />
+    <Compile Include="Helper\CommentAuthorHelper.cs" />
+    <Compile Include="Helper\CommentHelper.cs" />
+    <Compile Include="Helper\NewsDetailHelper.cs" />
+    <Compile Include="Helper\NewsHelper.cs" />
     <Compile Include="Model\Article.cs" />
-    <Compile Include="Model\Author.cs" />
+    <Compile Include="Model\ArticleAuthor.cs" />
     <Compile Include="Model\Blogger.cs" />
+    <Compile Include="Model\CommentAuthor.cs" />
+    <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\NewsDetail.cs" />
-    <Compile Include="Model\Comment.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\ArticleService.cs" />
-    <Compile Include="Service\AuthorService.cs" />
     <Compile Include="Service\BlogService.cs" />
-    <Compile Include="Service\CommentService.cs" />
     <Compile Include="Service\NewsService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +84,7 @@
       <HintPath>..\packages\Microsoft.Bcl.1.1.8\lib\portable-net40+sl5+win8+wp8+wpa81\System.Threading.Tasks.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
