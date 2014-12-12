@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -14,6 +15,8 @@ namespace SoftwareKobo.CnblogsAPI.Service
         private const string CommentUrlTemplate = "http://wcf.open.cnblogs.com/blog/post/{0}/comments/{1}/{2}";
 
         private const string SearchBloggerUrlTemplate = "http://wcf.open.cnblogs.com/blog/bloggers/search?t={0}";
+
+        private const string RecommendUrlTemplate = "http://wcf.open.cnblogs.com/blog/bloggers/recommend/{0}/{1}";
 
         /// <summary>
         /// 获取文章内容。如果文章不存在，则返回空字符串。
@@ -82,6 +85,52 @@ namespace SoftwareKobo.CnblogsAPI.Service
                 return CommentService.DeserializeToNewsComments(document);
             }
         }
+
+        private const string TwoDaysTopViewUrlTemplate = "http://wcf.open.cnblogs.com/blog/48HoursTopViewPosts/{0}";
+
+        /// <summary>
+        /// 48 小时阅读排行。
+        /// </summary>
+        /// <param name="itemCount">文章数量。</param>
+        /// <returns>文章</returns>
+        /// <exception cref="ArgumentOutOfRangeException">文章数量小于 1。</exception>
+        public static async Task<IEnumerable<Article>> TwoDaysTopViewAsync(int itemCount)
+        {
+            if (itemCount <1)
+            {
+                throw new ArgumentOutOfRangeException("itemCount");
+            }
+
+            var url = string.Format(CultureInfo.InvariantCulture,TwoDaysTopViewUrlTemplate, itemCount);
+            var uri = new Uri(url, UriKind.Absolute);
+            var request = WebRequest.Create(uri);
+            using (var response=await request.GetResponseAsync())
+            {
+                var document = XDocument.Load(response.GetResponseStream());
+                return ArticleService.DeserializeToaArticles(document);
+            }
+        }
+
+        //public static async Task<IEnumerable<Blogger>> RecommendAsync(int pageIndex,int pageSize)
+        //{
+        //    if (pageIndex<1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("pageIndex");
+        //    }
+        //    if (pageSize<1)
+        //    {
+        //        throw new ArgumentOutOfRangeException("pageSize");
+        //    }
+
+        //    var url = string.Format(CultureInfo.InvariantCulture, RecommendUrlTemplate, pageIndex, pageSize);
+        //    var uri = new Uri(url, UriKind.Absolute);
+        //    var request = WebRequest.Create(uri);
+        //    using (var response=await  request.GetResponseAsync())
+        //    {
+        //        var document = XDocument.Load(response.GetResponseStream());
+        //        return (document);
+        //    }
+        //}
 
         //[Obsolete]
         //public static async Task<IEnumerable<Blogger>> SearchBlogger(string bloggerName)

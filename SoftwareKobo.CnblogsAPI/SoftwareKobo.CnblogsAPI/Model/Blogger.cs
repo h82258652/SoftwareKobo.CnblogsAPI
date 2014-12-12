@@ -42,5 +42,32 @@ namespace SoftwareKobo.CnblogsAPI.Model
             get;
             set;
         }
+
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string Blogapp
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 用户头像
+        /// </summary>
+        public Uri Avatar
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 发表文章数。
+        /// </summary>
+        public int? PostCount
+        {
+            get;
+            set;
+        }
     }
 }

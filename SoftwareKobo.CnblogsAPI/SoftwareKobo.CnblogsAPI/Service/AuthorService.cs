@@ -1,13 +1,35 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using SoftwareKobo.CnblogsAPI.Model;
+﻿using SoftwareKobo.CnblogsAPI.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace SoftwareKobo.CnblogsAPI.Service
 {
     internal static class AuthorService
     {
+        internal static IEnumerable<Author> DeserializeToAuthors(XDocument document)
+        {
+            if (document == null)
+            {
+                return null;
+            }
+
+            var root = document.Root;
+            if (root == null)
+            {
+                return null;
+            }
+
+            var ns = root.GetDefaultNamespace();
+            var authors = from entry in root.Elements(ns + "entry")
+                          where entry.HasElements
+                          let temp = DeserializeToAuthor(entry)
+                          where temp != null
+                          select temp;
+            return authors;
+        }
+
         internal static Author DeserializeToAuthor(XElement element)
         {
             if (element == null)

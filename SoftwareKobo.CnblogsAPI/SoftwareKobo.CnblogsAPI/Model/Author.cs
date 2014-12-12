@@ -24,5 +24,14 @@ namespace SoftwareKobo.CnblogsAPI.Model
             get;
             set;
         }
+
+        /// <summary>
+        /// 用户头像。
+        /// </summary>
+        public Uri Avatar
+        {
+            get;
+            set;
+        }
     }
 }

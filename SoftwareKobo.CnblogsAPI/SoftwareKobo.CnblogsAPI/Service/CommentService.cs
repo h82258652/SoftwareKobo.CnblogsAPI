@@ -57,7 +57,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
 
             return new Comment
             {
-                Id = Int32.Parse(id.Value),
+                Id = int.Parse(id.Value),
                 Title = title.Value,
                 Published = DateTime.Parse(published.Value),
                 Updated = DateTime.Parse(updated.Value),

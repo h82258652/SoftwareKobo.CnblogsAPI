@@ -44,12 +44,14 @@
   <ItemGroup>
     <Compile Include="Extension\NewsDetailExtensions.cs" />
     <Compile Include="Extension\NewsExtensions.cs" />
+    <Compile Include="Model\Article.cs" />
     <Compile Include="Model\Author.cs" />
     <Compile Include="Model\Blogger.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\NewsDetail.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\ArticleService.cs" />
     <Compile Include="Service\AuthorService.cs" />
     <Compile Include="Service\BlogService.cs" />
     <Compile Include="Service\CommentService.cs" />
