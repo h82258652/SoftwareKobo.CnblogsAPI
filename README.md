@@ -7,7 +7,6 @@ SoftwareKobo.CnblogsAPI
 https://www.nuget.org/packages/SoftwareKobo.CnblogsAPI/
 <br/>
 ##2.编写代码：##
-<br/>
 ###2.1.博客相关：###
 <table>
 <tr>
@@ -21,7 +20,6 @@ articles = await BlogService.RecentAsync(1, 15);
 </td>
 </tr>
 </table>
-<br/>
 ###2.2.新闻相关：###
 <table>
 <tr>
