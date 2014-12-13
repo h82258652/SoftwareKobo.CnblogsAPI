@@ -69,5 +69,9 @@ namespace SoftwareKobo.CnblogsAPI.Model
             get;
             internal set;
         }
+
+        internal Blogger()
+        {
+        }
     }
 }
