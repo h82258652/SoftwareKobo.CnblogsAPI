@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.CnblogsAPI.Helper;
 using SoftwareKobo.CnblogsAPI.Model;
+using SoftwareKobo.Net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -212,7 +213,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <returns>博主列表。</returns>
         public static async Task<IEnumerable<Blogger>> SearchBloggerAsync(string bloggerTitle)
         {
-            var url = string.Format(CultureInfo.InvariantCulture, SearchBloggerUrlTemplate, bloggerTitle);
+            var url = string.Format(CultureInfo.InvariantCulture, SearchBloggerUrlTemplate, WebUtility.UrlEncode(bloggerTitle));
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = await request.GetResponseAsync())
