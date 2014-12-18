@@ -1,10 +1,7 @@
-﻿using SoftwareKobo.CnblogsAPI.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SoftwareKobo.CnblogsAPI.Service
@@ -14,32 +11,27 @@ namespace SoftwareKobo.CnblogsAPI.Service
     /// </summary>
     public static class LoginService
     {
-        private static Cookie Cookie;
-
+        /// <summary>
+        /// 登录的 Url。
+        /// </summary>
         private const string LoginUrl = @"http://m.cnblogs.com/mobileLoginPost.aspx";
 
+        /// <summary>
+        /// 访问登录页的 Url。
+        /// </summary>
         private const string LoginRefererUrl = @"http://m.cnblogs.com/mobileLogin.aspx";
 
-        public static async Task<Cookie> GetCookie(Action<User> setUserNameAndPassword)
-        {
-            if (Cookie != null)
-            {
-                return Cookie;
-            }
-
-            if (setUserNameAndPassword == null)
-            {
-                throw new ArgumentNullException(nameof(setUserNameAndPassword));
-            }
-
-            var user = new User();
-            setUserNameAndPassword(user);
-
-            Cookie = await Login(user.UserName, user.Password);
-            return Cookie;
-        }
-
-        private static async Task<Cookie> Login(string userName, string password)
+        /// <summary>
+        /// 登录博客园。
+        /// </summary>
+        /// <param name="userName">用户名。</param>
+        /// <param name="password">密码。</param>
+        /// <returns>登录成功则返回 Cookie，不成功则返回 null。成功后请缓存 Cookie，请勿重复登录，以减轻博客园的压力。</returns>
+        /// <exception cref="ArgumentNullException">用户名为 null。</exception>
+        /// <exception cref="ArgumentNullException">密码为 null。</exception>
+        /// <exception cref="ArgumentException">用户名长度为零。</exception>
+        /// <exception cref="ArgumentException">密码长度为零。</exception>
+        public static async Task<Cookie> Login(string userName, string password)
         {
             if (userName == null)
             {
@@ -53,7 +45,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             {
                 throw new ArgumentException("用户名不能为空", nameof(userName));
             }
-            if (password.Length < 0)
+            if (password.Length <= 0)
             {
                 throw new ArgumentException("密码不能为空", nameof(password));
             }
@@ -81,6 +73,9 @@ namespace SoftwareKobo.CnblogsAPI.Service
             {
                 cookie = null;
             }
+
+            client.Dispose();
+
             return cookie;
         }
     }

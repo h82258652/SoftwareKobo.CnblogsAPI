@@ -2,6 +2,7 @@
 using SoftwareKobo.CnblogsAPI.Service;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace SoftwareKobo.CnblogsAPI.Extension
@@ -41,6 +42,18 @@ namespace SoftwareKobo.CnblogsAPI.Extension
                 throw new ArgumentNullException(nameof(news));
             }
             return await NewsService.DetailAsync(news.Id);
+        }
+
+        /// <summary>
+        /// 发送新闻评论。
+        /// </summary>
+        /// <param name="news">新闻。</param>
+        /// <param name="cookie">Cookie。</param>
+        /// <param name="comment">评论内容。</param>
+        /// <returns>一段 Html，指示是否操作成功。</returns>
+        public static async Task<string> SendCommentAsync(this News news,Cookie cookie,string comment)
+        {
+            return await CommentService.Send(cookie, news.Id, comment);
         }
     }
 }
