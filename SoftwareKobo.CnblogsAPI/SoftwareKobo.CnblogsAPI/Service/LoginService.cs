@@ -31,7 +31,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <exception cref="ArgumentNullException">密码为 null。</exception>
         /// <exception cref="ArgumentException">用户名长度为零。</exception>
         /// <exception cref="ArgumentException">密码长度为零。</exception>
-        public static async Task<Cookie> Login(string userName, string password)
+        public static async Task<Cookie> LoginAsync(string userName, string password)
         {
             if (userName == null)
             {

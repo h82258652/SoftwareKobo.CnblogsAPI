@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace SoftwareKobo.CnblogsAPI.Service
 {
-    public static class CommentService
+    /// <summary>
+    /// 发送新闻评论服务。
+    /// </summary>
+    public static class SendNewsCommentService
     {
-        private static async Task<string> Send(Cookie cookie, int newsId, string comment, int replyId)
+        private static async Task<string> SendAsync(Cookie cookie, int newsId, string comment, int replyId)
         {
             if (cookie == null)
             {
@@ -29,7 +32,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
                 throw new ArgumentException("评论过短", nameof(comment));
             }
 
-            SendComment sendComment = new SendComment
+            SendNewsComment sendComment = new SendNewsComment
             {
                 ContentId = newsId,
                 Content = comment,
@@ -57,33 +60,52 @@ namespace SoftwareKobo.CnblogsAPI.Service
         }
 
         /// <summary>
-        /// 回复指定评论。
+        /// 回复指定新闻评论。
         /// </summary>
         /// <param name="cookie">Cookie。</param>
         /// <param name="newsId">新闻 Id。</param>
-        /// <param name="comment">评论内容。</param>
-        /// <param name="replyId">回复的评论的 Id。</param>
+        /// <param name="comment">新闻评论内容。</param>
+        /// <param name="replyId">回复的新闻评论的 Id。</param>
         /// <returns>返回一段 Html 内容指示是否回复成功。</returns>
-        public static async Task<string> Reply(Cookie cookie, int newsId, string comment, int replyId)
+        public static async Task<string> ReplyAsync(Cookie cookie, int newsId, string comment, int replyId)
         {
             if (replyId <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(replyId));
             }
 
-            return await Send(cookie, newsId, comment, replyId);
+            return await SendAsync(cookie, newsId, comment, replyId);
         }
 
         /// <summary>
-        /// 发送评论。
+        /// 发送新闻评论。
         /// </summary>
         /// <param name="cookie">Cookie。</param>
         /// <param name="newsId">新闻 Id。</param>
-        /// <param name="comment">评论内容。</param>
+        /// <param name="comment">新闻评论内容。</param>
         /// <returns>返回一段 Html 内容指示是否回复成功。</returns>
-        public static async Task<string> Send(Cookie cookie, int newsId, string comment)
+        public static async Task<string> SendAsync(Cookie cookie, int newsId, string comment)
         {
-            return await Send(cookie, newsId, comment, 0);
+            return await SendAsync(cookie, newsId, comment, 0);
+        }
+
+        /// <summary>
+        /// 将发送新闻评论返回的 Html 进行检查，判断是否发送成功。
+        /// </summary>
+        /// <param name="responseHtml">发送新闻评论返回的 Html。</param>
+        /// <returns>是否发送成功。</returns>
+        /// <exception cref="ArgumentNullException">responseHtml 为 null。</exception>
+        public static bool IsSuccess(string responseHtml)
+        {
+            if (responseHtml==null)
+            {
+                throw new ArgumentNullException(nameof(responseHtml));
+            }
+            if (responseHtml.Contains("<span class=\"green\">刚刚发表了评论</span>"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

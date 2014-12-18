@@ -4,15 +4,15 @@ using SoftwareKobo.CnblogsAPI.Converter;
 namespace SoftwareKobo.CnblogsAPI.Model
 {
     /// <summary>
-    /// 发送的评论。
+    /// 发送的新闻评论。
     /// </summary>
-    internal class SendComment
+    internal class SendNewsComment
     {
         /// <summary>
         /// 新闻 Id。
         /// </summary>
         [JsonProperty(propertyName: "ContentID")]
-        internal int ContentId
+        public int ContentId
         {
             get;
             set;
@@ -21,13 +21,13 @@ namespace SoftwareKobo.CnblogsAPI.Model
         /// <summary>
         /// 评论内容。至少 3 个字符。
         /// </summary>
-        internal string Content
+        public string Content
         {
             get;
             set;
         }
 
-        [JsonProperty(propertyName: "strComment")]
+        [JsonProperty(propertyName: "strComment", DefaultValueHandling = DefaultValueHandling.Include)]
         internal string strComment
         {
             get;
@@ -40,7 +40,7 @@ namespace SoftwareKobo.CnblogsAPI.Model
         /// </summary>
         [JsonProperty(propertyName: "parentCommentId")]
         [JsonConverter(typeof(Int32StringConverter))]
-        internal int ParentCommentId
+        public int ParentCommentId
         {
             get;
             set;
@@ -52,5 +52,6 @@ namespace SoftwareKobo.CnblogsAPI.Model
             get;
             set;
         }
+        = string.Empty;
     }
 }

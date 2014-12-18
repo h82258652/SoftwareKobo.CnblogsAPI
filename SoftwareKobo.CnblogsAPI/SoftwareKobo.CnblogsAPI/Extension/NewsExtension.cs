@@ -53,7 +53,7 @@ namespace SoftwareKobo.CnblogsAPI.Extension
         /// <returns>一段 Html，指示是否操作成功。</returns>
         public static async Task<string> SendCommentAsync(this News news,Cookie cookie,string comment)
         {
-            return await CommentService.Send(cookie, news.Id, comment);
+            return await SendNewsCommentService.SendAsync(cookie, news.Id, comment);
         }
     }
 }
