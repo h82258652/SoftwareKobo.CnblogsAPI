@@ -20,7 +20,7 @@ namespace SoftwareKobo.CnblogsAPI.Extension
         /// <param name="pageSize">每页条数。</param>
         /// <returns>新闻评论。</returns>
         /// <exception cref="ArgumentNullException">新闻为 null。</exception>
-        public static async Task<IEnumerable<Comment>> CommentAsync(this News news, int pageIndex, int pageSize)
+        public static async Task<IEnumerable<NewsComment>> CommentAsync(this News news, int pageIndex, int pageSize)
         {
             if (news == null)
             {
@@ -48,12 +48,12 @@ namespace SoftwareKobo.CnblogsAPI.Extension
         /// 发送新闻评论。
         /// </summary>
         /// <param name="news">新闻。</param>
-        /// <param name="cookie">Cookie。</param>
-        /// <param name="comment">评论内容。</param>
+        /// <param name="cookie">Cookie，通过登录成功获取。</param>
+        /// <param name="comment">评论内容，不少于 3 个字符。</param>
         /// <returns>一段 Html，指示是否操作成功。</returns>
-        public static async Task<string> SendCommentAsync(this News news,Cookie cookie,string comment)
+        public static async Task<string> SendCommentAsync(this News news, Cookie cookie, string comment)
         {
-            return await SendNewsCommentService.SendAsync(cookie, news.Id, comment);
+            return await UserService.SendNewsCommentAsync(cookie, news.Id, comment, 0);
         }
     }
 }

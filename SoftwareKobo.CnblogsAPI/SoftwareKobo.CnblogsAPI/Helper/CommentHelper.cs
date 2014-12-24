@@ -9,7 +9,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
 {
     internal static class CommentHelper
     {
-        internal static Comment Deserialize(XElement element)
+        internal static T Deserialize<T>(XElement element) where T : Comment, new()
         {
             if (element == null)
             {
@@ -33,7 +33,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
                 return null;
             }
 
-            return new Comment
+            return new T
             {
                 Id = int.Parse(id.Value, CultureInfo.InvariantCulture),
                 Title = title.Value,
@@ -44,7 +44,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
             };
         }
 
-        internal static IEnumerable<Comment> Deserialize(XDocument document)
+        internal static IEnumerable<T> Deserialize<T>(XDocument document) where T : Comment, new()
         {
             var root = document?.Root;
             if (root == null)
@@ -55,7 +55,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
             var ns = root.GetDefaultNamespace();
             var comments = from entry in root.Elements(ns + "entry")
                            where entry.HasElements
-                           let temp = Deserialize(entry)
+                           let temp = Deserialize<T>(entry)
                            where temp != null
                            select temp;
             return comments;

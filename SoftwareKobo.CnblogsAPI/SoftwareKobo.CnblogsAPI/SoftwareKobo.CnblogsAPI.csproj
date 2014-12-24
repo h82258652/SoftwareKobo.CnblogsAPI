@@ -42,8 +42,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converter\Int32StringConverter.cs" />
-    <Compile Include="Model\SendNewsComment.cs" />
+    <Compile Include="Model\ArticleComment.cs" />
+    <Compile Include="Model\ArticleCommentResponse.cs" />
+    <Compile Include="Model\NewsComment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension\ArticleExtension.cs" />
     <Compile Include="Extension\BloggerExtension.cs" />
@@ -64,9 +65,8 @@
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\NewsDetail.cs" />
     <Compile Include="Service\BlogService.cs" />
-    <Compile Include="Service\SendNewsCommentService.cs" />
-    <Compile Include="Service\LoginService.cs" />
     <Compile Include="Service\NewsService.cs" />
+    <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

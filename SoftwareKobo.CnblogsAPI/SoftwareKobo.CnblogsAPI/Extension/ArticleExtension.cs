@@ -19,7 +19,7 @@ namespace SoftwareKobo.CnblogsAPI.Extension
         /// <param name="pageSize">每页条数。</param>
         /// <returns>评论列表。</returns>
         /// <exception cref="ArgumentNullException">文章为 null。</exception>
-        public static async Task<IEnumerable<Comment>> CommentAsync(this Article article, int pageIndex, int pageSize)
+        public static async Task<IEnumerable<ArticleComment>> CommentAsync(this Article article, int pageIndex, int pageSize)
         {
             if (article == null)
             {

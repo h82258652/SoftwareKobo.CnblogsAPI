@@ -5,7 +5,7 @@ namespace SoftwareKobo.CnblogsAPI.Model
     /// <summary>
     /// 评论。
     /// </summary>
-    public class Comment
+    public abstract class Comment
     {
         /// <summary>
         /// Id。

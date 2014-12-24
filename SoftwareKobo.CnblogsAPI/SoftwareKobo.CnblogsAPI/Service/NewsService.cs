@@ -54,7 +54,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <exception cref="ArgumentOutOfRangeException">新闻 Id 错误。</exception>
         /// <exception cref="ArgumentOutOfRangeException">评论页数错误。</exception>
         /// <exception cref="ArgumentOutOfRangeException">评论条数错误。</exception>
-        public static async Task<IEnumerable<Comment>> CommentAsync(int newsId, int pageIndex, int pageSize)
+        public static async Task<IEnumerable<NewsComment>> CommentAsync(int newsId, int pageIndex, int pageSize)
         {
             if (newsId < MinNewsId)
             {
@@ -84,7 +84,12 @@ namespace SoftwareKobo.CnblogsAPI.Service
             using (var response = await request.GetResponseAsync())
             {
                 var document = XDocument.Load(response.GetResponseStream());
-                return CommentHelper.Deserialize(document);
+                var comments = new List<NewsComment>(CommentHelper.Deserialize<NewsComment>(document));
+                for (var i = 0; i < comments.Count; i++)
+                {
+                    comments[i].NewsId = newsId;
+                }
+                return comments;
             }
         }
 
@@ -123,7 +128,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
         /// <param name="itemCount">条数。</param>
         /// <returns>新闻列表。</returns>
         /// <exception cref="ArgumentOutOfRangeException">条数错误。</exception>
-        public static async Task<IEnumerable<Model.News>> HotAsync(int itemCount)
+        public static async Task<IEnumerable<News>> HotAsync(int itemCount)
         {
             if (itemCount < 1)
             {
