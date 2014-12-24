@@ -79,6 +79,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, CommentUrlTemplate, newsId, pageIndex, pageSize);
+            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = await request.GetResponseAsync())
@@ -107,6 +108,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, DetailUrlTemplate, newsId);
+            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = (HttpWebResponse)await request.GetResponseAsync())
@@ -136,6 +138,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, HotUrlTemplate, itemCount);
+            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = await request.GetResponseAsync())
@@ -165,6 +168,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, RecentUrlTemplate, pageIndex, pageSize);
+            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = await request.GetResponseAsync())
@@ -194,6 +198,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, RecommendUrlTemplate, pageIndex, pageSize);
+            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = await request.GetResponseAsync())

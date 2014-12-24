@@ -42,6 +42,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\UrlNoCacheHelper.cs" />
     <Compile Include="Model\ArticleComment.cs" />
     <Compile Include="Model\ArticleCommentResponse.cs" />
     <Compile Include="Model\NewsComment.cs" />
