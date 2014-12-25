@@ -90,7 +90,7 @@ namespace SoftwareKobo.CnblogsAPI.Service
                     try
                     {
                         var response = await client.PostAsync(new Uri(LoginUrl, UriKind.Absolute), new FormUrlEncodedContent(formData));
-                        cookie = cookies.GetCookies(new Uri("http://m.cnblogs.com/"))[".DottextCookie"];
+                        cookie = cookies.GetCookies(new Uri("http://m.cnblogs.com/",UriKind.Absolute))[".DottextCookie"];
                     }
                     catch
                     {
