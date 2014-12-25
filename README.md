@@ -36,7 +36,7 @@ https://www.nuget.org/packages/SoftwareKobo.CnblogsAPI/
   <tr>
     <td>发送新闻评论</td>
     <td>
-      <pre><code>response = await UserService.SendNewsCommentAsync(cookie, newsId, "评论内容，至少 3 个字符", replyId)</code></pre>
+      <pre><code>response = await UserService.SendNewsCommentAsync(cookie, newsId, "评论内容，至少 3 个字符", replyId);</code></pre>
     </td>
   </tr>
 </table>
