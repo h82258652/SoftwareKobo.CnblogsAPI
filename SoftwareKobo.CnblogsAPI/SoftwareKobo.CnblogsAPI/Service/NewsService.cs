@@ -108,7 +108,6 @@ namespace SoftwareKobo.CnblogsAPI.Service
             }
 
             var url = string.Format(CultureInfo.InvariantCulture, DetailUrlTemplate, newsId);
-            url = url.WithCache();
             var uri = new Uri(url, UriKind.Absolute);
             var request = WebRequest.Create(uri);
             using (var response = (HttpWebResponse)await request.GetResponseAsync())
