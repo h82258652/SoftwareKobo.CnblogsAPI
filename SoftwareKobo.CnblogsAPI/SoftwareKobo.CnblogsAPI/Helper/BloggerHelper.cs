@@ -14,7 +14,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
             var root = document?.Root;
             if (root == null)
             {
-                return new Blogger[0];
+                return Enumerable.Empty<Blogger>();
             }
 
             var ns = root.GetDefaultNamespace();

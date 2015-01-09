@@ -49,7 +49,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
             var root = document?.Root;
             if (root == null)
             {
-                return new T[0];
+                return Enumerable.Empty<T>();
             }
 
             var ns = root.GetDefaultNamespace();
