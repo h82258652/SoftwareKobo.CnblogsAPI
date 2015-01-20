@@ -43,7 +43,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
 
             var newsDetail = new NewsDetail
             {
-                Title = WebUtility.HtmlDecode(title.Value),
+                Title = WebUtility.HtmlDecode(title.Value).Trim(),
                 SourceName = sourceName.Value,
                 SubmitDate = DateTime.Parse(submitDate.Value, CultureInfo.InvariantCulture),
                 Content = content.Value,

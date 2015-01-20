@@ -16,21 +16,23 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Stopwatch x = new Stopwatch();
-            x.Start();
-            var c = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
-            x.Stop();
-            Console.WriteLine(x.ElapsedTicks);
-            x.Reset();
-            x.Start();
-            var cf = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
-            x.Stop();
-            Console.WriteLine(x.ElapsedTicks);
-            x.Reset();
-            x.Start();
-            var cq = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
-            x.Stop();
-            Console.WriteLine(x.ElapsedTicks);
+var r=            NewsService.RecentAsync(1, 15).Result.ToList();
+
+            //Stopwatch x = new Stopwatch();
+            //x.Start();
+            //var c = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
+            //x.Stop();
+            //Console.WriteLine(x.ElapsedTicks);
+            //x.Reset();
+            //x.Start();
+            //var cf = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
+            //x.Stop();
+            //Console.WriteLine(x.ElapsedTicks);
+            //x.Reset();
+            //x.Start();
+            //var cq = NewsService.CommentAsync(511225, 1, int.MaxValue).Result;
+            //x.Stop();
+            //Console.WriteLine(x.ElapsedTicks);
             Console.ReadKey();
 
             //    var cookie = UserService.LoginAsync("h82258652", "842053625").Result;

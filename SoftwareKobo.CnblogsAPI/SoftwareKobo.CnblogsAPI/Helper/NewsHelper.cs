@@ -67,7 +67,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
             return new News
             {
                 Id = int.Parse(id.Value, CultureInfo.InvariantCulture),
-                Title = WebUtility.HtmlDecode(title.Value),
+                Title = WebUtility.HtmlDecode(title.Value).Trim(),
                 Summary = WebUtility.HtmlDecode(summary.Value),
                 Published = DateTime.Parse(published.Value, CultureInfo.InvariantCulture),
                 Updated = DateTime.Parse(updated.Value, CultureInfo.InvariantCulture),
