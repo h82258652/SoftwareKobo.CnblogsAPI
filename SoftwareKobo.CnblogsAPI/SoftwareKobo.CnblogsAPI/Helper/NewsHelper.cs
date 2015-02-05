@@ -1,9 +1,9 @@
 ﻿using SoftwareKobo.CnblogsAPI.Model;
-using SoftwareKobo.Net;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Xml.Linq;
 
 namespace SoftwareKobo.CnblogsAPI.Helper
