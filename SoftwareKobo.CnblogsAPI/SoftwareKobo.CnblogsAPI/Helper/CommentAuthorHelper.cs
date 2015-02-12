@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.CnblogsAPI.Model;
 using System;
+using System.Net;
 using System.Xml.Linq;
 
 namespace SoftwareKobo.CnblogsAPI.Helper
@@ -24,7 +25,7 @@ namespace SoftwareKobo.CnblogsAPI.Helper
 
             return new CommentAuthor
             {
-                Name = name.Value,
+                Name = WebUtility.HtmlDecode(name.Value),
                 Uri = new Uri(uri.Value, UriKind.Absolute)
             };
         }
